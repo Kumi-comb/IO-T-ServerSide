@@ -6,17 +6,16 @@
 </template>
 
 <script>
-import axios from '@nuxtjs/axios'
 export default {
   methods: {
-    toggleOn: deviceId => {
-      axios.put(`/api/devices/${deviceId}/queue`, {
+    toggleOn(deviceId) {
+      this.$axios.put(`/api/devices/${deviceId}/queue`, {
         type: 'TOGGLE',
         value: 'ON'
       })
     },
-    toggleOff: deviceId => {
-      axios.put(`/api/devices/${deviceId}/queue`, {
+    toggleOff(deviceId) {
+      this.$axios.put(`/api/devices/${deviceId}/queue`, {
         type: 'TOGGLE',
         value: 'OFF'
       })
