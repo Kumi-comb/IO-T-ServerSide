@@ -31,7 +31,7 @@ router.put(
     }
 
     return res.json({
-      id: '1145141919810',
+      id: req.params.deviceId,
       type: 'TOGGLE',
       value: 'ON',
       status: 'PENDING',
@@ -46,7 +46,7 @@ router.put(
  */
 router.get('/:deviceId/queue', (req, res) => {
   return res.json({
-    id: '1145141919810',
+    id: req.params.deviceId,
     type: 'TOGGLE',
     value: 'ON',
     status: 'PENDING',
