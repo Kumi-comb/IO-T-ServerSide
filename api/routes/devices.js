@@ -3,6 +3,9 @@ import { check, validationResult } from 'express-validator/check'
 
 const router = express.Router()
 
+/* 関連ライブラリ インポート */
+import queues from './../libs/queues'
+
 /**
  * デバイスキューを追加する
  */
@@ -21,7 +24,7 @@ router.put(
       .not()
       .isEmpty()
   ],
-  (req, res) => {
+  async (req, res) => {
     /* バリデーション */
     const validationErrors = validationResult(req)
     if (validationErrors.array().length !== 0) {
@@ -30,10 +33,14 @@ router.put(
         .json({ status: false, errors: validationErrors.array() })
     }
 
+    const body = req.body
+    const queueId = await queues
+      .add(req.params.deviceId, body.type, body.value)
+      .catch(err => res.status(500).json({ errors: err }))
     return res.json({
-      id: req.params.deviceId,
-      type: 'TOGGLE',
-      value: 'ON',
+      id: queueId,
+      type: body.type,
+      value: body.value,
       status: 'PENDING',
       user: { id: '11451491910' },
       timestamp: '1145141919810'
@@ -44,15 +51,10 @@ router.put(
 /**
  * デバイスの最新キューを取得する
  */
-router.get('/:deviceId/queue', (req, res) => {
-  return res.json({
-    id: req.params.deviceId,
-    type: 'TOGGLE',
-    value: 'ON',
-    status: 'PENDING',
-    user: { id: '11451491910' },
-    timestamp: '1145141919810'
-  })
+router.get('/:deviceId/queue', async (req, res) => {
+  const queue = await queues.getLatest(req.params.deviceId)
+
+  return res.json({ queue })
 })
 
 export default router
