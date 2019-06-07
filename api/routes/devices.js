@@ -54,7 +54,15 @@ router.put(
 router.get('/:deviceId/queue', async (req, res) => {
   const queue = await queues.getLatest(req.params.deviceId)
 
-  return res.json({ queue })
+  return res.json({
+    id: queue.queueId,
+    deviceId: queue.deviceId,
+    type: queue.type,
+    value: queue.value,
+    status: queue.status,
+    user: { id: queue.userId },
+    timestamp: queue.timestamp
+  })
 })
 
 export default router

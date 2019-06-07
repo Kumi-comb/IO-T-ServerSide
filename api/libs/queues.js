@@ -45,7 +45,7 @@ const getLatest = deviceId =>
           con.release()
           if (err) return reject(err)
 
-          return resolve(res)
+          return resolve(res[0])
         }
       )
     })
