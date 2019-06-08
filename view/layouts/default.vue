@@ -5,8 +5,7 @@
     section.nuxt
       nuxt
     footer.footer
-      .footer_item
-        | a
+      .footer_item a
       .footer_item b
       .footer_item c
 </template>
@@ -30,7 +29,7 @@
   }
 }
 .nuxt {
-  padding: 100px 0;
+  padding: 75px 0;
 }
 .footer {
   display: flex;

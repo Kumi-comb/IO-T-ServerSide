@@ -1,185 +1,15 @@
 <template lang="pug">
   section
-    span 1
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 2
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 3
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 4
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 5
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span I/O-T Server Side
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 95
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 96
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 97
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 98
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 99
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
-    span 100
-    button(@click='toggleOn("1")') ON
-    button(@click='toggleOff("1")') OFF
-    br
+    .panel
+      .panel_header
+        span.label コンセント
+        span.label ON
+        | 部屋の電灯
+      .panel_content.content_wrap
+        .content_wrap_item
+          button(@click='toggleOn("1")').btn.btn-block OFF
+        .content_wrap_item
+          button(@click='toggleOff("1")').btn.btn-block ON
 </template>
 
 <script>
@@ -201,4 +31,60 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.content_wrap {
+  font-size: 0;
+
+  &_item {
+    display: inline-block;
+
+    width: calc(100% / 2);
+    padding: 10px;
+
+    font-size: 1rem;
+  }
+}
+.panel {
+  padding: 10px;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  &_header {
+    padding: 10px;
+
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  &_content {
+    padding: 10px;
+
+    background-color: #e7e7e7;
+  }
+}
+.btn {
+  padding: 10px;
+
+  background-color: #302f2f;
+  color: #ffffff;
+
+  font-size: 1.5em;
+
+  border: none;
+
+  &:active {
+    background-color: #727272;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &-block {
+    display: block;
+    width: 100%;
+  }
+}
+</style>
