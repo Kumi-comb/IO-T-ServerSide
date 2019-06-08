@@ -1,7 +1,6 @@
 <template lang="pug">
   div
-    nav.nav
-      img.nav_logo(src='~/assets/images/logo.svg')
+    nav.nav スイッチパネル
     section.nuxt
       nuxt
     footer.footer
@@ -12,20 +11,27 @@
 
 <style lang="scss" scoped>
 .nav {
+  display: flex;
+  align-items: center;
   position: fixed;
   top: 0;
   width: 100%;
   height: 64px;
 
-  text-align: center;
+  padding: 0 10px;
 
-  background-color: #bcd14b;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 1.25em;
+  vertical-align: middle;
+  // text-align: center;
+
+  background-color: #e2e2e2;
+  font-size: 1.2em;
 
   &_logo {
     height: 64px;
     vertical-align: bottom;
+  }
+
+  &_title {
   }
 }
 .nuxt {
