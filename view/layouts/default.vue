@@ -1,25 +1,58 @@
 <template lang="pug">
   div
-    nuxt
+    nav.nav
+      img.nav_logo(src='~/assets/images/logo.svg')
+    section.nuxt
+      nuxt
+    footer.footer
+      .footer_item
+        | a
+      .footer_item b
+      .footer_item c
 </template>
 
-<style lang="scss">
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<style lang="scss" scoped>
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+  text-align: center;
+
+  background-color: #e2ff41;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 1.25em;
+
+  &_logo {
+    height: 64px;
+    vertical-align: bottom;
+  }
+}
+.nuxt {
+  padding: 100px 0;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 64px;
+
+  // padding: 10px;
+
+  background-color: #e7e7e7;
+
+  font-size: 0;
+
+  &_item {
+    display: inline-block;
+    font-size: 1rem;
+    width: calc(100% / 3);
+
+    text-align: center;
+    vertical-align: middle;
+  }
 }
 </style>
