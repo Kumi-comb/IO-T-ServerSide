@@ -19,7 +19,7 @@
 
   text-align: center;
 
-  background-color: #e2ff41;
+  background-color: #bcd14b;
   color: rgba(0, 0, 0, 0.5);
   font-size: 1.25em;
 
