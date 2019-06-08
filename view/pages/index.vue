@@ -7,41 +7,45 @@
         | 部屋の電灯
       .panel_content.contentWrap
         .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOn("1")').btn.btn-block.btn-off OFF
+          button(@click='toggleOff("1")').btn.btn-block.btn-off OFF
         .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOff("1")').btn.btn-block.btn-on ON
-    .panel
-      .panel_header
-        span.label コンセント
-        span.label.label-on ON
-        | 部屋の電灯
-      .panel_content.contentWrap
-        .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOn("1")').btn.btn-block.btn-off OFF
-        .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOff("1")').btn.btn-block.btn-on ON
-    .modalWrap
-      .modal
-        .modal_header 操作を受付けました
-        .modal_content 「部屋の電灯」にトグルリクエスト「ON」を送信しました。
-        .modal_footer
-          button.btn OK
+          button(@click='toggleOn("1")').btn.btn-block.btn-on ON
+    transition(name='fade')
+      .modalWrap(v-if='modal')
+        .modal
+          .modal_header {{ modal.title }}
+          .modal_content {{ modal.content }}
+          .modal_footer
+            button.btn(@click='modal = null') OK
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      modal: null
+    }
+  },
   methods: {
     toggleOn(deviceId) {
       this.$axios.put(`/api/devices/${deviceId}/queue`, {
         type: 'TOGGLE',
         value: 'ON'
       })
+      this.modal = {
+        title: '操作を受付けました',
+        content: '「部屋の電灯」にトグルリクエスト「ON」を送信しました。'
+      }
     },
     toggleOff(deviceId) {
       this.$axios.put(`/api/devices/${deviceId}/queue`, {
         type: 'TOGGLE',
         value: 'OFF'
       })
+      this.modal = {
+        title: '操作を受付けました',
+        content: '「部屋の電灯」にトグルリクエスト「OFF」を送信しました。'
+      }
     }
   }
 }
@@ -61,6 +65,7 @@ export default {
 
   background-color: rgba(0, 0, 0, 0.5);
 }
+
 .modal {
   max-width: 300px;
 
@@ -190,5 +195,14 @@ export default {
     background-color: #c04343;
     color: #ffffff;
   }
+}
+
+/** Vue Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 100ms;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
