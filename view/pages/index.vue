@@ -6,9 +6,9 @@
         span.label.label-on ON
         | 部屋の電灯
       .panel_content.contentWrap
-        .contentWrap_item
+        .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOn("1")').btn.btn-block.btn-off OFF
-        .contentWrap_item
+        .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOff("1")').btn.btn-block.btn-on ON
     .panel
       .panel_header
@@ -16,12 +16,16 @@
         span.label.label-on ON
         | 部屋の電灯
       .panel_content.contentWrap
-        .contentWrap_item
+        .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOn("1")').btn.btn-block.btn-off OFF
-        .contentWrap_item
+        .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOff("1")').btn.btn-block.btn-on ON
-    //- .modalWrap
-    //-   .modal
+    .modalWrap
+      .modal
+        .modal_header 操作を受付けました
+        .modal_content 「部屋の電灯」にトグルリクエスト「ON」を送信しました。
+        .modal_footer
+          button.btn OK
 </template>
 
 <script>
@@ -45,13 +49,44 @@ export default {
 
 <style lang="scss">
 .modalWrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: fixed;
   top: 64px;
   left: 0;
   width: 100%;
   height: calc(100% - 64px * 2);
 
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal {
+  max-width: 300px;
+
+  background-color: #ffffff;
+
+  &_header {
+    padding: 10px;
+
+    background-color: #333333;
+    color: #ffffff;
+
+    border-bottom: 2px solid #494949;
+  }
+
+  &_content {
+    padding: 10px;
+  }
+
+  &_footer {
+    padding: 10px;
+    padding-top: 0;
+
+    text-align: right;
+  }
+
+  // border-radius: 10px;
 }
 
 .contentWrap {
@@ -73,7 +108,7 @@ export default {
   background-color: #e7e7e7;
 
   border-bottom: 2px solid #cacaca;
-  border-radius: 10px;
+  // border-radius: 10px;
 
   &:not(:last-child) {
     margin-bottom: 20px;
@@ -84,8 +119,9 @@ export default {
 
     background-color: #333333;
     color: #ffffff;
+
     border-bottom: 2px solid #494949;
-    border-radius: 10px;
+    // border-radius: 10px;
   }
 
   &_content {
@@ -96,12 +132,12 @@ export default {
 .btn {
   padding: 10px;
 
-  border-radius: 10px;
+  // border-radius: 10px;
 
   background-color: #2f2f2f;
   color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  font-size: 1.5em;
+  font-size: 1em;
 
   border: none;
   cursor: pointer;
@@ -144,7 +180,7 @@ export default {
   background-color: #cccccc;
   color: #333333;
 
-  border-radius: 10px;
+  // border-radius: 10px;
 
   &-off {
     background-color: #43c05e;
