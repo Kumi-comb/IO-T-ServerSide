@@ -1,4 +1,5 @@
 import mysql from 'mysql'
+require('dotenv').config()
 
 export default mysql.createPool({
   user: process.env.MYSQL_USER,
