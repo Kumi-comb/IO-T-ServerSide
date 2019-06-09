@@ -144,7 +144,7 @@ export default {
   background-color: #2f2f2f;
   color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  font-size: 1em;
+  font-size: 1.5em;
 
   border: none;
   cursor: pointer;
