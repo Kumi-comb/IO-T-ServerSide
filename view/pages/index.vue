@@ -158,7 +158,7 @@ export default {
 }
 
 .panel {
-  padding: 5px 10px;
+  padding: 10px;
 
   background-color: #4d4d4d;
   color: #ffffff;
