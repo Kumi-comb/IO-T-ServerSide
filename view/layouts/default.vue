@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    nav.nav スイッチパネル
+    nav.nav I/O-T コントロールパネル
     section.nuxt
       nuxt
     footer.footer
