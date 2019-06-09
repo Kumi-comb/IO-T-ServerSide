@@ -7,20 +7,20 @@
       .card_content.contentWrap
         .contentWrap_item
           .panel
-            .panel_value 24℃
-            .panel_index 温度
+            .panel_value 13:00
+            .panel_index 取得時間
         .contentWrap_item
           .panel
             .panel_value 24℃
             .panel_index 温度
         .contentWrap_item
           .panel
-            .panel_value 24℃
-            .panel_index 温度
+            .panel_value 50%
+            .panel_index 湿度
         .contentWrap_item
           .panel
-            .panel_value 24℃
-            .panel_index 温度
+            .panel_value 90%
+            .panel_index 明るさレベル
     .card
       .card_header
         span.label コンセント
