@@ -5,6 +5,7 @@ const router = express.Router()
 
 /* 関連ライブラリ インポート */
 import queues from './../libs/queues'
+import devices from './../libs/devices'
 
 /**
  * デバイスキューを追加する
@@ -65,4 +66,38 @@ router.get('/:deviceId/queue', async (req, res) => {
   })
 })
 
+router.put(
+  '/:deviceId/status',
+  [
+    check('temperature')
+      .isInt()
+      .not()
+      .isEmpty(),
+    check('humidity')
+      .isInt()
+      .not()
+      .isEmpty(),
+    check('illuminance')
+      .isInt()
+      .not()
+      .isEmpty()
+  ],
+  async (req, res) => {
+    /* バリデーション */
+    const validationErrors = validationResult(req)
+    if (validationErrors.array().length !== 0) {
+      return res
+        .status(422)
+        .json({ status: false, errors: validationErrors.array() })
+    }
+
+    const addStatus = await devices.addStatus(req.params.deviceId, 'SENSOR', {
+      temperature: req.body.temperature,
+      humidity: req.body.humidity,
+      illuminance: req.body.illuminance
+    })
+
+    return res.json({ status: addStatus })
+  }
+)
 export default router
