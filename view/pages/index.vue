@@ -9,6 +9,16 @@
         .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOff("1")').btn.btn-block.btn-large.btn-off OFF
         .contentWrap_item.contentWrap_item-toggle
+          button(@click='toggleOn("1")', disable).btn.btn-block.btn-large.btn-on ON
+    .panel
+      .panel_header
+        span.label コンセント
+        span.label.label-off OFF
+        | 部屋の電灯
+      .panel_content.contentWrap
+        .contentWrap_item.contentWrap_item-toggle
+          button(@click='toggleOff("1")', disable).btn.btn-block.btn-large.btn-off OFF
+        .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOn("1")').btn.btn-block.btn-large.btn-on ON
     transition(name='fade')
       .modalWrap(v-if='modal')
@@ -179,6 +189,11 @@ export default {
     &:active {
       background-color: #7e1a1a;
     }
+  }
+
+  &[disable] {
+    background-color: #a8a8a8;
+    cursor: not-allowed;
   }
 }
 
