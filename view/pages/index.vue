@@ -78,6 +78,8 @@ export default {
     color: #ffffff;
 
     border-bottom: 2px solid #494949;
+
+    border-radius: 5px;
   }
 
   &_content {
@@ -91,7 +93,7 @@ export default {
     text-align: right;
   }
 
-  // border-radius: 10px;
+  border-radius: 5px;
 }
 
 .contentWrap {
@@ -113,7 +115,7 @@ export default {
   background-color: #e7e7e7;
 
   border-bottom: 2px solid #cacaca;
-  // border-radius: 10px;
+  border-radius: 5px;
 
   &:not(:last-child) {
     margin-bottom: 20px;
@@ -126,7 +128,7 @@ export default {
     color: #ffffff;
 
     border-bottom: 2px solid #494949;
-    // border-radius: 10px;
+    border-radius: 5px;
   }
 
   &_content {
@@ -137,7 +139,7 @@ export default {
 .btn {
   padding: 10px;
 
-  // border-radius: 10px;
+  border-radius: 5px;
 
   background-color: #2f2f2f;
   color: #ffffff;
@@ -185,7 +187,7 @@ export default {
   background-color: #cccccc;
   color: #333333;
 
-  // border-radius: 10px;
+  border-radius: 5px;
 
   &-off {
     background-color: #43c05e;
