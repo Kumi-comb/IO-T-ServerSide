@@ -25,6 +25,7 @@
 
   background-color: #e2e2e2;
   font-size: 1.2em;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.125);
 
   &_logo {
     height: 64px;
