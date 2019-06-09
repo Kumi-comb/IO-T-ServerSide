@@ -9,7 +9,7 @@
         .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOff("1")').btn.btn-block.btn-large.btn-off OFF
         .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOn("1")', disable).btn.btn-block.btn-large.btn-on ON
+          button(disable).btn.btn-block.btn-large.btn-on ON
     .panel
       .panel_header
         span.label コンセント
@@ -17,7 +17,7 @@
         | 部屋の電灯
       .panel_content.contentWrap
         .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOff("1")', disable).btn.btn-block.btn-large.btn-off OFF
+          button(disable).btn.btn-block.btn-large.btn-off OFF
         .contentWrap_item.contentWrap_item-toggle
           button(@click='toggleOn("1")').btn.btn-block.btn-large.btn-on ON
     transition(name='fade')
@@ -193,6 +193,9 @@ export default {
 
   &[disable] {
     background-color: #a8a8a8;
+
+    box-shadow: none;
+
     cursor: not-allowed;
   }
 }
