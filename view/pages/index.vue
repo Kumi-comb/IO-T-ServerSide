@@ -7,9 +7,9 @@
         | 部屋の電灯
       .panel_content.contentWrap
         .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOff("1")').btn.btn-block.btn-off OFF
+          button(@click='toggleOff("1")').btn.btn-block.btn-large.btn-off OFF
         .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOn("1")').btn.btn-block.btn-on ON
+          button(@click='toggleOn("1")').btn.btn-block.btn-large.btn-on ON
     transition(name='fade')
       .modalWrap(v-if='modal')
         .modal
@@ -144,7 +144,7 @@ export default {
   background-color: #2f2f2f;
   color: #ffffff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-  font-size: 1.5em;
+  font-size: 1em;
 
   border: none;
   cursor: pointer;
@@ -157,6 +157,10 @@ export default {
 
   &:focus {
     outline: none;
+  }
+
+  &-large {
+    font-size: 1.5em;
   }
 
   &-block {
