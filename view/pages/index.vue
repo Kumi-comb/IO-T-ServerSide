@@ -122,9 +122,10 @@ export default {
 
   &_item {
     display: inline-block;
+    vertical-align: top;
 
     width: calc(100% / 2);
-    padding: 10px;
+    padding: 5px;
 
     font-size: 1rem;
   }
