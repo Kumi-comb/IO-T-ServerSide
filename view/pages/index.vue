@@ -112,7 +112,7 @@ export default {
 .panel {
   margin: 10px;
 
-  background-color: #e7e7e7;
+  background-color: #d8d8d8;
 
   border-bottom: 2px solid #cacaca;
   border-radius: 5px;
@@ -148,6 +148,8 @@ export default {
 
   border: none;
   cursor: pointer;
+
+  transition: all linear 100ms;
 
   &:active {
     background-color: #727272;
@@ -202,9 +204,10 @@ export default {
 /** Vue Transitions */
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 100ms;
+  transition: opacity 250ms;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
 }
 </style>
