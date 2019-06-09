@@ -35,7 +35,7 @@
   }
 }
 .nuxt {
-  padding: 75px 0;
+  margin: 90px 2.5%;
 }
 .footer {
   display: flex;
