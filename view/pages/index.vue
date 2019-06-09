@@ -1,25 +1,36 @@
 <template lang="pug">
   section
-    .panel
-      .panel_header
+    .card
+      .card_header
+        span.label センサー
+        | 部屋
+      .card_content.contentWrap
+        .contentWrap_item
+          .panel
+            .panel_value 24℃
+            .panel_index 温度
+        .contentWrap_item
+          .panel
+            .panel_value 24℃
+            .panel_index 温度
+        .contentWrap_item
+          .panel
+            .panel_value 24℃
+            .panel_index 温度
+        .contentWrap_item
+          .panel
+            .panel_value 24℃
+            .panel_index 温度
+    .card
+      .card_header
         span.label コンセント
         span.label.label-on ON
         | 部屋の電灯
-      .panel_content.contentWrap
-        .contentWrap_item.contentWrap_item-toggle
+      .card_content.contentWrap
+        .contentWrap_item
           button(@click='toggleOff("1")').btn.btn-block.btn-large.btn-off OFF
-        .contentWrap_item.contentWrap_item-toggle
+        .contentWrap_item
           button(disable).btn.btn-block.btn-large.btn-on ON
-    .panel
-      .panel_header
-        span.label コンセント
-        span.label.label-off OFF
-        | 部屋の電灯
-      .panel_content.contentWrap
-        .contentWrap_item.contentWrap_item-toggle
-          button(disable).btn.btn-block.btn-large.btn-off OFF
-        .contentWrap_item.contentWrap_item-toggle
-          button(@click='toggleOn("1")').btn.btn-block.btn-large.btn-on ON
     transition(name='fade')
       .modalWrap(v-if='modal')
         .modal
@@ -119,7 +130,7 @@ export default {
   }
 }
 
-.panel {
+.card {
   margin: 10px;
 
   background-color: #d8d8d8;
@@ -143,6 +154,23 @@ export default {
 
   &_content {
     padding: 10px;
+  }
+}
+
+.panel {
+  padding: 5px 10px;
+
+  background-color: #4d4d4d;
+  color: #ffffff;
+  text-align: center;
+
+  border-radius: 5px;
+
+  &_index {
+    font-size: 0.9em;
+  }
+  &_value {
+    font-size: 1.25em;
   }
 }
 
