@@ -18,7 +18,7 @@
   width: 100%;
   height: 64px;
 
-  padding: 0 10px;
+  padding: 0 20px;
 
   vertical-align: middle;
   // text-align: center;
