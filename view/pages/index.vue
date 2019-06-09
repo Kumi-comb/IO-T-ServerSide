@@ -192,7 +192,7 @@ export default {
   }
 
   &[disable] {
-    background-color: #a8a8a8;
+    background-color: #c0c0c0;
 
     box-shadow: none;
 
