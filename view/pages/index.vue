@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     async loadDevices() {
+      console.log(await this.$axios.get("/api/devices"))
       const devicesList = await this.$axios.get("/api/devices").catch(err => {
         switch (err.message) {
           case "Network Error":
