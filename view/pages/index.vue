@@ -28,7 +28,7 @@
         | 部屋の電灯
       .card_content.contentWrap
         .contentWrap_item
-          button(@click='toggleOff("1")').btn.btn-block.btn-large.btn-off OFF
+          button(@click='addQueue("deviceId", "TOGGLE", "0")').btn.btn-block.btn-large.btn-off OFF
         .contentWrap_item
           button(disable).btn.btn-block.btn-large.btn-on ON
     transition(name='fade')
@@ -45,31 +45,21 @@ export default {
   data() {
     return {
       modal: null
-    }
+    };
   },
   methods: {
-    toggleOn(deviceId) {
+    addQueue(deviceId, type, value) {
       this.$axios.put(`/api/devices/${deviceId}/queue`, {
-        type: 'TOGGLE',
-        value: 'ON'
-      })
+        type,
+        value
+      });
       this.modal = {
-        title: '操作を受付けました',
-        content: '「部屋の電灯」にトグルリクエスト「ON」を送信しました。'
-      }
-    },
-    toggleOff(deviceId) {
-      this.$axios.put(`/api/devices/${deviceId}/queue`, {
-        type: 'TOGGLE',
-        value: 'OFF'
-      })
-      this.modal = {
-        title: '操作を受付けました',
-        content: '「部屋の電灯」にトグルリクエスト「OFF」を送信しました。'
-      }
+        title: "操作を受付けました",
+        content: `${deviceId}にリクエスト「${value}」を送信しました。`
+      };
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
