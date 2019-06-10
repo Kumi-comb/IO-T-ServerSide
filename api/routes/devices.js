@@ -6,7 +6,6 @@ const router = express.Router()
 /* 関連ライブラリ インポート */
 import queues from './../libs/queues'
 import devices from './../libs/devices'
-import { resolve } from 'q'
 
 router.get('/', async (req, res) => {
   const devicesList = await devices.get('1')
