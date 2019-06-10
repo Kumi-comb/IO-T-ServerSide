@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -56,7 +58,7 @@ export default {
   },
   methods: {
     async loadDevices() {
-      const devicesList = await this.$axios.get("/api/devices").catch(err => {
+      const devicesList = await axios.get("/api/devices").catch(err => {
         switch (err.message) {
           case "Network Error":
             alert(
@@ -91,7 +93,7 @@ export default {
     addQueue(deviceIndexId, type, value) {
       const device = this.devices[deviceIndexId];
 
-      this.$axios.put(`/api/devices/${device.id}/queue`, {
+      axios.put(`/api/devices/${device.id}/queue`, {
         type,
         value
       });
