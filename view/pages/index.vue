@@ -68,7 +68,7 @@ export default {
             console.error(err);
         }
       });
-      console.log(devicesList.data);
+
       this.devices = devicesList.data.map(x => ({
         id: x.id,
         type: {
@@ -86,7 +86,6 @@ export default {
         user: x.user,
         status: x.status
       }));
-      console.log(this.devices);
     },
     addQueue(deviceIndexId, type, value) {
       const device = this.devices[deviceIndexId];
