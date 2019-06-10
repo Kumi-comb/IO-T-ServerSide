@@ -61,7 +61,6 @@ router.put(
       id: queueId,
       type: body.type,
       value: body.value,
-      status: 'PENDING',
       user: { id: '11451491910' },
       timestamp: '1145141919810'
     })
@@ -79,7 +78,6 @@ router.get('/:deviceId/queue', async (req, res) => {
     deviceId: queue.deviceId,
     type: queue.type,
     value: queue.value,
-    status: queue.status,
     user: { id: queue.userId },
     timestamp: queue.timestamp
   })
