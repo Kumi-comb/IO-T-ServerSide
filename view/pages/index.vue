@@ -56,7 +56,18 @@ export default {
   },
   methods: {
     async loadDevices() {
-      const devicesList = await this.$axios.get("/api/devices");
+      const devicesList = await this.$axios.get("/api/devices").catch(err => {
+        switch (err.message) {
+          case "Network Error":
+            alert(
+              "ネットワークエラーが発生しました。再読込みすると解決する可能性があります。"
+            );
+            clearInterval(this.intervalId);
+            break;
+          default:
+            console.error(err);
+        }
+      });
       console.log(devicesList.data);
       this.devices = devicesList.data.map(x => ({
         id: x.id,
