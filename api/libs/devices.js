@@ -1,3 +1,4 @@
+require('date-utils')
 import db from './db'
 
 const get = userId =>
@@ -38,6 +39,8 @@ const addStatus = (deviceId, type, status) =>
     db.getConnection((err, con) => {
       if (err) return reject(err)
 
+      const timestamp = Math.floor(new Date().getTime() / 1000)
+
       con.query(
         {
           sql: 'INSERT INTO statuses SET ?',
@@ -45,7 +48,7 @@ const addStatus = (deviceId, type, status) =>
             deviceId,
             type,
             status: JSON.stringify(status),
-            timestamp: 114514
+            timestamp
           }
         },
         err => {
@@ -75,7 +78,7 @@ const loadLatestStatusFromDeviceId = deviceId =>
       con.query(
         {
           sql:
-            'SELECT * FROM statuses WHERE deviceId = ? ORDER BY timestamp DESC LIMIT 1',
+            'SELECT * FROM statuses WHERE deviceId = ? ORDER BY statusId DESC LIMIT 1',
           values: [deviceId]
         },
         (err, res) => {
