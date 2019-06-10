@@ -7,6 +7,21 @@ const router = express.Router()
 import queues from './../libs/queues'
 import devices from './../libs/devices'
 
+router.get('/', (req, res) => {
+  // const devicesList = await devices.get('1')
+  const devicesList = [
+    {
+      id: '1',
+      type: 'TOGGLE',
+      name: '部屋の照明',
+      user: { id: '1' },
+      value: 'ON'
+    }
+  ]
+
+  return res.json(devicesList)
+})
+
 /**
  * デバイスキューを追加する
  */
@@ -66,6 +81,9 @@ router.get('/:deviceId/queue', async (req, res) => {
   })
 })
 
+/**
+ * デバイス状態データを追加する
+ */
 router.put(
   '/:deviceId/status',
   [
@@ -100,4 +118,5 @@ router.put(
     return res.json({ status: addStatus })
   }
 )
+
 export default router

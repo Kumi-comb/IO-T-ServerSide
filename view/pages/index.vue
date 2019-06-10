@@ -28,7 +28,7 @@
         | 部屋の電灯
       .card_content.contentWrap
         .contentWrap_item
-          button(@click='addQueue("deviceId", "TOGGLE", "0")').btn.btn-block.btn-large.btn-off OFF
+          button(@click='addQueue("deviceId", "TOGGLE", "OFF")').btn.btn-block.btn-large.btn-off OFF
         .contentWrap_item
           button(disable).btn.btn-block.btn-large.btn-on ON
     transition(name='fade')
@@ -44,8 +44,13 @@
 export default {
   data() {
     return {
+      devices: null,
       modal: null
     };
+  },
+  async beforeMount() {
+    const devicesList = await this.$axios.get("/api/devices");
+    console.log(devicesList);
   },
   methods: {
     addQueue(deviceId, type, value) {
