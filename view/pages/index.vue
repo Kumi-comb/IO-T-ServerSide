@@ -1,43 +1,41 @@
 <template lang="pug">
   section
-    .card
-      .card_header
-        span.label センサー
-        | 部屋
-      .card_content.contentWrap
-        .contentWrap_item
-          .panel
-            .panel_value 13:00
-            .panel_index 取得時間
-        .contentWrap_item
-          .panel
-            .panel_value 24℃
-            .panel_index 温度
-        .contentWrap_item
-          .panel
-            .panel_value 50%
-            .panel_index 湿度
-        .contentWrap_item
-          .panel
-            .panel_value 90%
-            .panel_index 明るさレベル
-    .card
-      .card_header
-        span.label コンセント
-        span.label.label-on ON
-        | 部屋の電灯
-      .card_content.contentWrap
-        .contentWrap_item
-          button(@click='addQueue("deviceId", "TOGGLE", "OFF")').btn.btn-block.btn-large.btn-off OFF
-        .contentWrap_item
-          button(disable).btn.btn-block.btn-large.btn-on ON
-    transition(name='fade')
-      .modalWrap(v-if='modal')
-        .modal
-          .modal_header {{ modal.title }}
-          .modal_content {{ modal.content }}
-          .modal_footer
-            button.btn(@click='modal = null') OK
+    div(v-if='devices', v-for='(device, index) in devices')
+      .card
+        .card_header
+          span.label {{ device.type.name }}
+          span(v-if='device.type.enum === "TOGGLE"', :class='{ "label-on": device.status.value === "ON", "label-off" : device.status.value === "OFF" }').label {{ device.status.value }}
+          | {{ device.name }}
+        .card_content
+          .contentWrap(v-if='device.type.enum === "TOGGLE"')
+            .contentWrap_item
+              button(@click='addQueue(index, "TOGGLE", "OFF")', :disabled='device.status.value === "OFF"').btn.btn-block.btn-large.btn-off OFF
+            .contentWrap_item
+              button(@click='addQueue(index, "TOGGLE", "ON")', :disabled='device.status.value === "ON"').btn.btn-block.btn-large.btn-on ON
+          .contentWrap(v-if='device.type.enum === "SENSOR"')
+            .contentWrap_item
+              .panel
+                .panel_value {{ device.status.timestamp }}
+                .panel_index 取得時間
+            .contentWrap_item
+              .panel
+                .panel_value {{ device.status.temperature }}℃
+                .panel_index 温度
+            .contentWrap_item
+              .panel
+                .panel_value {{ device.status.humidity }}%
+                .panel_index 湿度
+            .contentWrap_item
+              .panel
+                .panel_value {{ device.status.illuminance }}%
+                .panel_index 明るさレベル
+      transition(name='fade')
+        .modalWrap(v-if='modal')
+          .modal
+            .modal_header {{ modal.title }}
+            .modal_content {{ modal.content }}
+            .modal_footer
+              button.btn(@click='modal = null') OK
 </template>
 
 <script>
@@ -45,22 +43,49 @@ export default {
   data() {
     return {
       devices: null,
-      modal: null
+      modal: null,
+      intervalId: null
     };
   },
-  async beforeMount() {
-    const devicesList = await this.$axios.get("/api/devices");
-    console.log(devicesList);
+  beforeMount() {
+    this.loadDevices();
+    this.intervalId = setInterval(() => this.loadDevices(), 10000);
+  },
+  beforeDestroy() {
+    clearInterval(this.intervalId);
   },
   methods: {
-    addQueue(deviceId, type, value) {
-      this.$axios.put(`/api/devices/${deviceId}/queue`, {
+    async loadDevices() {
+      const devicesList = await this.$axios.get("/api/devices");
+      this.devices = devicesList.data.map(x => ({
+        id: x.id,
+        type: {
+          enum: x.type,
+          name:
+            x.type === "TOGGLE"
+              ? "コンセント"
+              : x.type === "REMOTE"
+              ? "リモコン"
+              : x.type === "SENSOR"
+              ? "センサー"
+              : "Undefined"
+        },
+        name: x.name,
+        user: x.user,
+        status: x.status
+      }));
+      console.log(this.devices);
+    },
+    addQueue(deviceIndexId, type, value) {
+      const device = this.devices[deviceIndexId];
+
+      this.$axios.put(`/api/devices/${device.id}/queue`, {
         type,
         value
       });
       this.modal = {
         title: "操作を受付けました",
-        content: `${deviceId}にリクエスト「${value}」を送信しました。`
+        content: `${device.name}にリクエスト「${value}」を送信しました。`
       };
     }
   }
@@ -215,7 +240,7 @@ export default {
     }
   }
 
-  &[disable] {
+  &[disabled] {
     background-color: #c0c0c0;
 
     box-shadow: none;
