@@ -89,12 +89,12 @@ router.get('/:deviceId/queue', async (req, res) => {
 router.put(
   '/:deviceId/status',
   [
-    check('type').isString(),
-    check('temperature').isInt(),
-    check('humidity').isInt(),
-    check('illuminance').isInt(),
-    check('value').isString(),
-    check('signalId').isString()
+    check('type').isString()
+    // check('temperature').isInt(),
+    // check('humidity').isInt(),
+    // check('illuminance').isInt(),
+    // check('value').isString(),
+    // check('signalId').isString()
   ],
   async (req, res) => {
     /* バリデーション */
