@@ -92,18 +92,12 @@ router.get('/:deviceId/queue', async (req, res) => {
 router.put(
   '/:deviceId/status',
   [
-    check('temperature')
-      .isInt()
-      .not()
-      .isEmpty(),
-    check('humidity')
-      .isInt()
-      .not()
-      .isEmpty(),
-    check('illuminance')
-      .isInt()
-      .not()
-      .isEmpty()
+    check('type').isString(),
+    check('temperature').isInt(),
+    check('humidity').isInt(),
+    check('illuminance').isInt(),
+    check('value').isString(),
+    check('signalId').isString()
   ],
   async (req, res) => {
     /* バリデーション */
@@ -114,11 +108,20 @@ router.put(
         .json({ status: false, errors: validationErrors.array() })
     }
 
-    const addStatus = await devices.addStatus(req.params.deviceId, 'SENSOR', {
-      temperature: req.body.temperature,
-      humidity: req.body.humidity,
-      illuminance: req.body.illuminance
-    })
+    const type = req.body.type
+    const data =
+      type === 'TOGGLE'
+        ? { value: req.body.value }
+        : type === 'SENSOR'
+        ? {
+            temperature: req.body.temperature,
+            humidity: req.body.humidity,
+            illuminance: req.body.illuminance
+          }
+        : type === 'REMOTE'
+        ? { signalId: req.body.signalId }
+        : {}
+    const addStatus = await devices.addStatus(req.params.deviceId, type, data)
 
     return res.json({ status: addStatus })
   }
