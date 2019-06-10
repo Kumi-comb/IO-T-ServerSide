@@ -31,9 +31,6 @@
     height: 64px;
     vertical-align: bottom;
   }
-
-  &_title {
-  }
 }
 .nuxt {
   margin: 90px 2.5%;
