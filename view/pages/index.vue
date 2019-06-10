@@ -29,13 +29,13 @@
               .panel
                 .panel_value {{ device.status.illuminance }}%
                 .panel_index 明るさレベル
-      transition(name='fade')
-        .modalWrap(v-if='modal')
-          .modal
-            .modal_header {{ modal.title }}
-            .modal_content {{ modal.content }}
-            .modal_footer
-              button.btn(@click='modal = null') OK
+    transition(name='fade')
+      .modalWrap(v-if='modal')
+        .modal
+          .modal_header {{ modal.title }}
+          .modal_content {{ modal.content }}
+          .modal_footer
+            button.btn(@click='modal = null') OK
 </template>
 
 <script>
