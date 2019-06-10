@@ -57,6 +57,7 @@ export default {
   methods: {
     async loadDevices() {
       const devicesList = await this.$axios.get("/api/devices");
+      console.log(devicesList.data);
       this.devices = devicesList.data.map(x => ({
         id: x.id,
         type: {

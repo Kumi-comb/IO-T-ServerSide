@@ -2,7 +2,7 @@ import db from './db'
 
 const get = userId =>
   new Promise(async (resolve, reject) => {
-    const devicesList = await getDevicesFromUserId(userId)
+    const devicesList = await loadDevicesFromUserId(userId)
     const result = devicesList.map(x => ({
       id: x.deviceId,
       type: x.type,
@@ -13,7 +13,7 @@ const get = userId =>
     return resolve(result)
   })
 
-const getDevicesFromUserId = userId =>
+const loadDevicesFromUserId = userId =>
   new Promise((resolve, reject) => {
     db.getConnection((err, con) => {
       if (err) return reject(err)
@@ -58,7 +58,38 @@ const addStatus = (deviceId, type, status) =>
     })
   })
 
+const getLatestStatus = deviceId =>
+  new Promise(async (resolve, reject) => {
+    const latestStatus = await loadLatestStatusFromDeviceId(deviceId)
+    const status = JSON.parse(latestStatus.status)
+    status.timestamp = latestStatus.timestamp
+
+    return resolve(status)
+  })
+
+const loadLatestStatusFromDeviceId = deviceId =>
+  new Promise((resolve, reject) => {
+    db.getConnection((err, con) => {
+      if (err) return reject(err)
+
+      con.query(
+        {
+          sql:
+            'SELECT * FROM statuses WHERE deviceId = ? ORDER BY timestamp DESC LIMIT 1',
+          values: [deviceId]
+        },
+        (err, res) => {
+          con.release()
+          if (err) return reject(err)
+
+          return resolve(res[0])
+        }
+      )
+    })
+  })
+
 export default {
   get,
-  addStatus
+  addStatus,
+  getLatestStatus
 }

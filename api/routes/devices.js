@@ -6,51 +6,25 @@ const router = express.Router()
 /* 関連ライブラリ インポート */
 import queues from './../libs/queues'
 import devices from './../libs/devices'
+import { resolve } from 'q'
 
-router.get('/', (req, res) => {
-  // const devicesList = await devices.get('1')
-  const devicesList = [
-    {
-      id: '1',
-      type: 'TOGGLE',
-      name: '部屋の照明',
-      user: { id: '1' },
-      status: { value: 'OFF', timestamp: '1145141919810' }
-    },
-    {
-      id: '2',
-      type: 'SENSOR',
-      name: '部屋',
-      user: { id: '1' },
-      status: {
-        temperature: '34',
-        humidity: '50',
-        illuminance: '92',
-        timestamp: '1145141919810'
-      }
-    },
-    {
-      id: '3',
-      type: 'TOGGLE',
-      name: '部屋の照明',
-      user: { id: '1' },
-      status: { value: 'OFF', timestamp: '1145141919810' }
-    },
-    {
-      id: '4',
-      type: 'SENSOR',
-      name: '部屋',
-      user: { id: '1' },
-      status: {
-        temperature: '34',
-        humidity: '50',
-        illuminance: '92',
-        timestamp: '1145141919810'
-      }
-    }
-  ]
+router.get('/', async (req, res) => {
+  const devicesList = await devices.get('1')
 
-  return res.json(devicesList)
+  const devicesListWithStatus = await Promise.all(
+    devicesList.map(async x => {
+      const latestStatus = await devices.getLatestStatus(x.id)
+      return {
+        id: x.id,
+        type: x.type,
+        name: x.name,
+        // user: { id: x. },
+        status: latestStatus
+      }
+    })
+  )
+
+  return res.json(devicesListWithStatus)
 })
 
 /**
