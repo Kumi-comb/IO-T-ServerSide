@@ -75,7 +75,7 @@ const loadLatestStatusFromDeviceId = deviceId =>
       con.query(
         {
           sql:
-            'SELECT * FROM statuses WHERE deviceId = ? ORDER BY timestamp DESC LIMIT 1',
+            'SELECT * FROM statuses WHERE deviceId = ? ORDER BY timestamp LIMIT 1',
           values: [deviceId]
         },
         (err, res) => {
