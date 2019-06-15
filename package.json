@@ -8,7 +8,8 @@
     "dev": "nodemon --watch api --exec nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "test": "jest"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
@@ -23,6 +24,10 @@
     "nuxt": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
     "node-sass": "^4.12.0",
     "nodemon": "^1.18.9",
     "pug": "^2.0.3",

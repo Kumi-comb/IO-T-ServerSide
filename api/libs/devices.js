@@ -1,5 +1,5 @@
 require('date-utils')
-import db from './db'
+import mysqlDB from './db'
 
 const get = userId =>
   new Promise(async (resolve, reject) => {
@@ -21,6 +21,8 @@ const loadDevicesFromUserId = userId =>
 
       con.query({ sql: 'SELECT * FROM devices WHERE 1' }, (err, res) => {
         con.release()
+        db.escape()
+
         if (err) return reject(err)
 
         return resolve(res)
@@ -53,6 +55,8 @@ const addStatus = (deviceId, type, status) =>
         },
         err => {
           con.release()
+          db.escape()
+
           if (err) return reject(err)
 
           return resolve(true)
@@ -83,6 +87,8 @@ const loadLatestStatusFromDeviceId = deviceId =>
         },
         (err, res) => {
           con.release()
+          db.escape()
+
           if (err) return reject(err)
 
           return resolve(res[0])
