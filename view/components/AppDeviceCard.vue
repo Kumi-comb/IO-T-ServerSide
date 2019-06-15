@@ -45,7 +45,7 @@ export default {
         value
       });
       this.displayModal({
-        level: "",
+        level: "success",
         title: "操作を受付けました。",
         content: `${this.device.name}にリクエスト「${value}」を送信しました。`
       });

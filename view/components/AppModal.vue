@@ -13,9 +13,6 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: "AppModal",
-  mounted() {
-    console.log(this.displayModal, this.hideModal);
-  },
   computed: {
     ...mapGetters("modal", { modal: "modal" })
   },
@@ -56,6 +53,10 @@ export default {
 
     &-error {
       background-color: #b9182d;
+    }
+
+    &-success {
+      background-color: #06aa37;
     }
   }
 

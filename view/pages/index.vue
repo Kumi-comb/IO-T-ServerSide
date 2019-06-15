@@ -42,7 +42,6 @@ export default {
             console.error(err);
         }
       });
-      console.log(devicesList.data);
       if (!devicesList.data) {
         this.displayModal({
           level: "error",
@@ -52,7 +51,6 @@ export default {
         clearInterval(this.intervalId);
         return;
       }
-      console.log(devicesList);
 
       this.devices = devicesList.data.map(x => ({
         id: x.id,
