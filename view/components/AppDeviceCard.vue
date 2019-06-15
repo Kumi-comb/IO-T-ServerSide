@@ -28,33 +28,27 @@
             .panel
               .panel_value {{ device.status.illuminance }}%
               .panel_index 明るさレベル
-    AppModal(:modalData='this.modal')
 </template>
 
 <script>
-import AppModal from "~/components/AppModal";
-
 import axios from "axios";
+import { mapActions } from "vuex";
 
 export default {
   name: "AppDeviceCard",
-  components: { AppModal },
   props: ["device"],
-  data() {
-    return {
-      modal: null
-    };
-  },
   methods: {
+    ...mapActions({ displayModal: "modal/display" }),
     addQueue(deviceId, type, value) {
       axios.put(`/api/devices/${deviceId}/queue`, {
         type,
         value
       });
-      this.modal = {
-        title: "操作を受付けました",
+      this.displayModal({
+        level: "",
+        title: "操作を受付けました。",
         content: `${this.device.name}にリクエスト「${value}」を送信しました。`
-      };
+      });
     }
   }
 };

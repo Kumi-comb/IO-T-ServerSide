@@ -1,29 +1,26 @@
 <template lang="pug">
   transition(name='fade')
-    .modalWrap(v-if='modalData')
+    .modalWrap(v-if='modal.isDisplay')
       .modal
-        .modal_header {{ modalData.title }}
-        .modal_content {{ modalData.content }}
+        .modal_header(:class='`modal_header-${ modal.level }`') {{ modal.title }}
+        .modal_content {{ modal.content }}
         .modal_footer
-          button.btn(@click='clearData()') OK
+          button.btn(@click='hideModal()') OK
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   name: "AppModal",
-  props: { modalData: Object },
   mounted() {
-    console.log(this.modal);
+    console.log(this.displayModal, this.hideModal);
   },
-  data() {
-    return {
-      displayData: this.modalData
-    };
+  computed: {
+    ...mapGetters("modal", { modal: "modal" })
   },
   methods: {
-    clearData() {
-      this.displayData = null;
-    }
+    ...mapActions("modal", { displayModal: "display", hideModal: "hide" })
   }
 };
 </script>
@@ -44,7 +41,8 @@ export default {
 }
 
 .modal {
-  max-width: 300px;
+  width: 90%;
+  max-width: 500px;
 
   background-color: #ffffff;
 
@@ -54,9 +52,11 @@ export default {
     background-color: #333333;
     color: #ffffff;
 
-    border-bottom: 2px solid #494949;
-
     border-radius: 5px;
+
+    &-error {
+      background-color: #b9182d;
+    }
   }
 
   &_content {

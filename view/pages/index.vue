@@ -5,8 +5,10 @@
 </template>
 
 <script>
-import AppDeviceCard from "~/components/AppDeviceCard.vue";
 import axios from "axios";
+import { mapActions } from "vuex";
+
+import AppDeviceCard from "~/components/AppDeviceCard.vue";
 
 export default {
   components: { AppDeviceCard },
@@ -24,19 +26,31 @@ export default {
     clearInterval(this.intervalId);
   },
   methods: {
+    ...mapActions({ displayModal: "modal/display" }),
     async loadDevices() {
       const devicesList = await axios.get("/api/devices").catch(err => {
         switch (err.message) {
           case "Network Error":
-            alert(
-              "ネットワークエラーが発生しました。再読込みすると解決する可能性があります。"
-            );
+            this.displayModal({
+              level: "error",
+              title: "API接続エラー",
+              content: "ネットワークエラーが発生しました。"
+            });
             clearInterval(this.intervalId);
-            break;
+            return;
           default:
             console.error(err);
         }
       });
+      if (!devicesList.devices) {
+        this.displayModal({
+          level: "error",
+          title: "データ取得エラー",
+          content: "データの読み込みに失敗しました。"
+        });
+        clearInterval(this.intervalId);
+        return;
+      }
       console.log(devicesList);
 
       this.devices = devicesList.data.map(x => ({

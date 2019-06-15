@@ -7,7 +7,16 @@
       .footer_item a
       .footer_item b
       .footer_item c
+    AppModal
 </template>
+
+<script>
+import AppModal from "~/components/AppModal.vue";
+
+export default {
+  components: { AppModal }
+};
+</script>
 
 <style lang="scss" scoped>
 .nav {
