@@ -42,7 +42,8 @@ export default {
             console.error(err);
         }
       });
-      if (!devicesList.devices) {
+      console.log(devicesList.data);
+      if (!devicesList.data) {
         this.displayModal({
           level: "error",
           title: "データ取得エラー",
