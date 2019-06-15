@@ -5,7 +5,7 @@
       nuxt
     footer.footer
       .footer_item
-        img.footer_item_profileIcon(src='~/assets/icon.png')
+        img.footer_item_profileIcon(src='~/assets/profileIcon.png')
       .footer_item ホーム
       .footer_item 設定
     AppModal
