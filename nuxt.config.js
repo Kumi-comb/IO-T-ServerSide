@@ -1,3 +1,9 @@
+const meta = {
+  title: 'I/O-T',
+  description: 'I/O-T Module Control App',
+  themeColor: '#ff8800'
+}
+
 export default {
   mode: 'spa',
   srcDir: './view',
@@ -14,7 +20,8 @@ export default {
         hid: 'description',
         name: 'description',
         content: process.env.npm_package_description || ''
-      }
+      },
+      { name: 'theme-color', content: meta.themeColor }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -39,7 +46,8 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/pwa'
   ],
 
   /*
@@ -56,6 +64,24 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+
+  meta: {
+    mobileAppIOS: true,
+    name: meta.title,
+    description: meta.description,
+    theme_color: meta.themeColor,
+    lang: 'ja'
+  },
+
+  manifest: {
+    name: meta.title,
+    short_name: meta.title,
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#ffffff',
+    description: meta.description,
+    lang: 'ja'
   },
 
   serverMiddleware: ['~~/api']

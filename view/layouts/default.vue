@@ -4,9 +4,10 @@
     section.nuxt
       nuxt
     footer.footer
-      .footer_item a
-      .footer_item b
-      .footer_item c
+      .footer_item
+        img.footer_item_profileIcon(src='~/assets/icon.png')
+      .footer_item ホーム
+      .footer_item 設定
     AppModal
 </template>
 
@@ -54,7 +55,7 @@ export default {
 
   // padding: 10px;
 
-  background-color: #e7e7e7;
+  background-color: #e4e4e4;
 
   font-size: 0;
 
@@ -65,6 +66,12 @@ export default {
 
     text-align: center;
     vertical-align: middle;
+
+    &_profileIcon {
+      width: 48px;
+      border-radius: 50%;
+      vertical-align: bottom;
+    }
   }
 }
 </style>

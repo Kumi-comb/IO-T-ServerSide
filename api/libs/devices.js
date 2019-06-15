@@ -1,5 +1,5 @@
 require('date-utils')
-import mysqlDB from './db'
+import db from './db'
 
 const get = userId =>
   new Promise(async (resolve, reject) => {
