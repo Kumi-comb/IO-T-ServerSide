@@ -1,7 +1,7 @@
 const meta = {
   title: 'I/O-T',
   description: 'I/O-T Module Control App',
-  themeColor: '#ff8800'
+  themeColor: '#e2e2e2'
 }
 
 export default {
