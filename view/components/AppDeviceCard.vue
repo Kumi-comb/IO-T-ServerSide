@@ -14,7 +14,7 @@
         .contentWrap(v-else-if='device.type.enum === "SENSOR"')
           .contentWrap_item
             .panel
-              .panel_value {{ device.status.timestamp }}
+              .panel_value {{ device.status.timestamp | moment}}
               .panel_index 取得時間
           .contentWrap_item
             .panel
@@ -34,6 +34,8 @@
 import axios from "axios";
 import { mapActions } from "vuex";
 
+import moment from "moment";
+
 export default {
   name: "AppDeviceCard",
   props: ["device"],
@@ -49,6 +51,11 @@ export default {
         title: "操作を受付けました。",
         content: `${this.device.name}にリクエスト「${value}」を送信しました。`
       });
+    }
+  },
+  filters: {
+    moment(timestamp) {
+      return moment(timestamp * 1000).format("HH:mm");
     }
   }
 };

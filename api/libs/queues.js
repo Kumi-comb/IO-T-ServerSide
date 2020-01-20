@@ -18,6 +18,8 @@ const add = (deviceId, type, value) =>
         },
         (err, res) => {
           con.release()
+          db.escape()
+
           if (err) return reject(err)
 
           return resolve(res.insertId)
@@ -43,6 +45,8 @@ const getLatest = deviceId =>
         },
         (err, res) => {
           con.release()
+          db.escape()
+
           if (err) return reject(err)
 
           return resolve(res[0])
@@ -68,6 +72,8 @@ const updateStatus = (queueId, status) =>
         },
         (err, res) => {
           con.release()
+          db.escape()
+
           if (err) return reject(err)
 
           return resolve(true)
